@@ -1,0 +1,140 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <style>
+            body {
+                min-height: 150vh;
+                background: #eee;
+                font-family: sans-serif;
+            }
+
+            .output {
+                position: fixed;
+                z-index: 4;
+            }
+
+            .cart {
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                background-color: #ddd;
+                padding: 7px 13px;
+            }
+
+            .cart2 {
+                top: initial;
+                bottom: 50px;
+                background-color: #ccc;
+            }
+
+            .wrapper {
+                min-height: 100vh;
+                background: pink;
+                position: relative;
+            }
+
+            button {
+                position: absolute;
+                bottom: 10px;
+                right: 10px;
+                padding: 7px 13px;
+                background-color: #fff;
+                border: 1px solid #ddd;
+                cursor: pointer;
+            }
+
+            .wrapper button:first-of-type {
+                right: 160px;
+            }
+
+            #booker_trolley {
+                position: fixed;
+                right: 0;
+                bottom: 100px;
+                padding: 20px;
+                background-color: white;
+            }
+
+            .active {
+                background-color: #f60 !important;
+            }
+        </style>
+    </head>
+    <body>
+        <p class="output">output</p>
+        <div class="wrapper">
+            Wrapper 1
+            <div id="mini-trolley" class="cart">
+                Cart
+            </div>
+            <button>Add to cart</button>
+            <button>Remove from cart</button>
+        </div>
+        <div class="wrapper">
+            Wrapper 2
+            <button>Add to cart</button>
+            <button>Remove from cart</button>
+        </div>
+        <div class="wrapper">
+            Wrapper 3
+            <div id="mini-trolley-mobile" class="cart cart2">
+                Cart
+            </div>
+            <button>Add to cart</button>
+            <button>Remove from cart</button>
+        </div>
+
+        <div class="trolley-wrapper">
+            Trolley wrapper
+        </div>
+         
+        <script>
+            var target1 = document.querySelector('div#mini-trolley');
+            var target2 = document.querySelector('div#mini-trolley-mobile');
+            const activeClass = 'active';
+            const trigger = $('button');
+            var output = $('.output');
+            let isCartItemClicked = false;
+
+            trigger.on('click', function() {
+                isCartItemClicked = true;
+                checkElementInViewport();
+            });
+
+            // isElementInViewPort
+            function isElementInViewport(element, expandMargin = 0) {
+                var currentWindowWidth = window.innerWidth;
+                var currentWindowHeight = window.innerHeight;
+                const rect = element.getBoundingClientRect();
+                const expandMarginX = isNaN(expandMargin) ? expandMargin.x : expandMargin;
+                const expandMarginY = isNaN(expandMargin) ? expandMargin.y : expandMargin;
+                const spanY = rect.top + Math.max(rect.height, 1) + expandMarginY;
+                const spanX = rect.left + Math.max(rect.width, 1) + expandMarginX;
+
+                return (
+                    spanY >= Math.min(0, expandMarginY) + 1 &&
+                    rect.top <= currentWindowHeight + expandMarginY - 1 &&
+                    spanX >= Math.min(0, expandMarginX) + 1 &&
+                    rect.left <= currentWindowWidth + expandMarginX - 1
+                );
+            }
+
+            var elementInViewport = isElementInViewport;
+            // end is elementInViewPort
+
+            function checkElementInViewport() {
+                if ((elementInViewport(target1) || elementInViewport(target2)) && isCartItemClicked) {
+                    console.log('Element in viewport and item clicked');
+                    $(output).text('');
+                    $(output).text('Element in viewport and item clicked');
+                    isCartItemClicked = false;
+                }
+            }
+
+            $(window).on('scroll', function(){
+                checkElementInViewport();
+            });
+
+        </script>
+    </body>
+</html>
