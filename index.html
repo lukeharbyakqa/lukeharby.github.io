@@ -91,8 +91,8 @@
         <script>
             var target1 = document.querySelector('div#mini-trolley');
             var target2 = document.querySelector('div#mini-trolley-mobile');
-            const activeClass = 'active';
-            const trigger = $('button');
+            var activeClass = 'active';
+            var trigger = $('button');
             var output = $('.output');
             let isCartItemClicked = false;
 
@@ -103,14 +103,14 @@
 
             /* isElementInViewPort */
             function isElementInViewport(element, expandMargin) {
-                expandMargin = 0;
+                var expandMargin = 0;
                 var currentWindowWidth = window.innerWidth;
                 var currentWindowHeight = window.innerHeight;
-                const rect = element.getBoundingClientRect();
-                const expandMarginX = isNaN(expandMargin) ? expandMargin.x : expandMargin;
-                const expandMarginY = isNaN(expandMargin) ? expandMargin.y : expandMargin;
-                const spanY = rect.top + Math.max(rect.height, 1) + expandMarginY;
-                const spanX = rect.left + Math.max(rect.width, 1) + expandMarginX;
+                var rect = element.getBoundingClientRect();
+                var expandMarginX = isNaN(expandMargin) ? expandMargin.x : expandMargin;
+                var expandMarginY = isNaN(expandMargin) ? expandMargin.y : expandMargin;
+                var spanY = rect.top + Math.max(rect.height, 1) + expandMarginY;
+                var spanX = rect.left + Math.max(rect.width, 1) + expandMarginX;
 
                 return (
                     spanY >= Math.min(0, expandMarginY) + 1 &&
