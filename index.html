@@ -96,6 +96,7 @@
             var output = $('.output');
             let isCartItemClicked = false;
             var date = new Date();
+            date.toISOString().split('.')[0];
 
             trigger.on('click', function() {
                 isCartItemClicked = true;
@@ -128,14 +129,13 @@
                 if ((elementInViewport(target1) || elementInViewport(target2)) && isCartItemClicked) {
                     console.log('Element in viewport and item clicked' );
                     $(output).text('');
-                    $(output).text('Element in viewport and item clicked');
+                    $(output).text('Element in viewport and item clicked', date);
                     isCartItemClicked = false;
                 }
             }
 
             $(window).on('scroll', function(){
                 checkElementInViewport();
-                date.toLocaleFormat('%d-%b-%Y');
                 console.log(date);
             });
 
