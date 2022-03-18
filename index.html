@@ -95,6 +95,7 @@
             var trigger = $('button');
             var output = $('.output');
             let isCartItemClicked = false;
+            var date = new Date();
 
             trigger.on('click', function() {
                 isCartItemClicked = true;
@@ -125,7 +126,7 @@
 
             function checkElementInViewport() {
                 if ((elementInViewport(target1) || elementInViewport(target2)) && isCartItemClicked) {
-                    console.log('Element in viewport and item clicked');
+                    console.log('Element in viewport and item clicked' );
                     $(output).text('');
                     $(output).text('Element in viewport and item clicked');
                     isCartItemClicked = false;
@@ -134,6 +135,8 @@
 
             $(window).on('scroll', function(){
                 checkElementInViewport();
+                date.toLocaleFormat('%d-%b-%Y');
+                console.log(date);
             });
 
         </script>
