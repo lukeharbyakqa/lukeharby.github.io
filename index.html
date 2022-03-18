@@ -129,14 +129,13 @@
                 if ((elementInViewport(target1) || elementInViewport(target2)) && isCartItemClicked) {
                     console.log('Element in viewport and item clicked' );
                     $(output).text('');
-                    $(output).text('Element in viewport and item clicked', date);
+                    $(output).text('Element in viewport and item clicked', date.toString());
                     isCartItemClicked = false;
                 }
             }
 
             $(window).on('scroll', function(){
                 checkElementInViewport();
-                console.log(date);
             });
 
         </script>
