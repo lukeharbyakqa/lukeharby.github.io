@@ -126,7 +126,12 @@
             /* end is elementInViewPort */
 
             function checkElementInViewport() {
-                if ((elementInViewport(target1) || elementInViewport(target2)) && isCartItemClicked) {
+                if (
+                    isCartItemClicked &&
+                    (elementInViewport(target1) && $(target1).is(':visible')
+                    || 
+                    elementInViewport(target2) && $(target2).is(':visible'))
+                ) {
                     console.log('Element in viewport and item clicked' );
                     $(output).text('');
                     $(output).text('Element in viewport and item clicked', date.toString());
@@ -134,8 +139,12 @@
                 }
             }
 
+            checkElementInViewport();
+            
             $(window).on('scroll', function(){
                 checkElementInViewport();
+                console.log('target1: ', elementInViewport(target1));
+                console.log('target2: ', elementInViewport(target2));
             });
 
         </script>
